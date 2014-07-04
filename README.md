@@ -3,8 +3,6 @@ qtcp
 
 An experimental object-oriented ratchet wrapper
 
-[![Build Status](https://travis-ci.org/jgswift/qtcp.png?branch=master)](https://travis-ci.org/jgswift/qtcp)
-
 ## Installation
 
 Install via [composer](https://getcomposer.org/):
