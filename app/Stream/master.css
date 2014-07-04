@@ -1,0 +1,113 @@
+body {
+    font-family: Arial;
+    background:black;
+    color:white;
+}
+
+#chart {
+    width:80%;
+    display:inline-block;
+    border-radius:3px;
+    background: #b5bdc8;
+    background: -moz-linear-gradient(top,  #b5bdc8 0%, #828c95 36%, #28343b 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#b5bdc8), color-stop(36%,#828c95), color-stop(100%,#28343b));
+    background: -webkit-linear-gradient(top,  #b5bdc8 0%,#828c95 36%,#28343b 100%);
+    background: -o-linear-gradient(top,  #b5bdc8 0%,#828c95 36%,#28343b 100%);
+    background: -ms-linear-gradient(top,  #b5bdc8 0%,#828c95 36%,#28343b 100%);
+    background: linear-gradient(to bottom,  #b5bdc8 0%,#828c95 36%,#28343b 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5bdc8', endColorstr='#28343b',GradientType=0 );
+}
+
+.dygraph-legend {
+    border-radius:3px;
+    border: 1px solid black;
+    padding:10px;
+    
+     background:rgb(255,255,255)!important;
+	background: transparent\9!important;
+	background:rgba(255,255,255,0.3)!important;
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#4cFFFFFF,endColorstr=#4cFFFFFF);
+	zoom: 1;
+}
+
+.dygraph-legend * {
+    color:black;
+}
+
+body * {
+    font-family: Arial;
+    color:white;
+}
+
+#qtcp-container {
+    margin:10px;
+    white-space: nowrap;
+}
+
+#qtcp-container ul.list {
+    width:62px;
+    border: 2px solid white;
+    border-radius: 3px;
+    list-style-type:none;
+    margin:0px;
+    padding:0px;
+    margin-right:10px;
+    display:inline-block;
+    float:left;
+    height:98%;
+}
+
+#qtcp-container ul.list li {
+    text-transform: uppercase;
+    cursor:hand;
+}
+
+#qtcp-container .stream {
+    display:inline-block;
+    width:50px;
+    height:35px;
+    text-transform: uppercase;
+    text-align:center;
+    padding:15px;
+    padding-top:8px;
+    background: #b5bdc8;
+    text-shadow: 1px 1px 1px black;
+    border-radius:3px;
+    margin:5px;
+background: -moz-linear-gradient(top,  #b5bdc8 0%, #828c95 36%, #28343b 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#b5bdc8), color-stop(36%,#828c95), color-stop(100%,#28343b));
+background: -webkit-linear-gradient(top,  #b5bdc8 0%,#828c95 36%,#28343b 100%);
+background: -o-linear-gradient(top,  #b5bdc8 0%,#828c95 36%,#28343b 100%);
+background: -ms-linear-gradient(top,  #b5bdc8 0%,#828c95 36%,#28343b 100%);
+background: linear-gradient(to bottom,  #b5bdc8 0%,#828c95 36%,#28343b 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5bdc8', endColorstr='#28343b',GradientType=0 );
+
+}
+
+#qtcp-container .stream .stream-value {
+    font-weight:bold;
+    background-color:black;
+    border: 2px gray inset;
+}
+
+svg {
+  font: 10px sans-serif;
+}
+
+.area {
+  fill: steelblue;
+  clip-path: url(#clip);
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.brush .extent {
+  stroke: #fff;
+  fill-opacity: .125;
+  shape-rendering: crispEdges;
+}
