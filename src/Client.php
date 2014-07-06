@@ -2,9 +2,12 @@
 namespace qtcp {
     use observr;
     use qtil;
-    use \Ratchet\ConnectionInterface;
+    use qio;
+    use Ratchet\ConnectionInterface;
     
-    class Client implements \qio\Stream {
+    class Client implements qio\Stream, \ArrayAccess {
+        use qtil\ArrayAccess;
+        
         protected $socket;
         protected $character;
         protected $id;
