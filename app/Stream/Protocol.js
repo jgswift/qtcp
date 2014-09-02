@@ -4,7 +4,7 @@ qtcp.network.protocol.ask = function() {
 
 qtcp.network.protocol.register = function() {
     qtcp.network.packet.call(this,'register');
-    this.receive = function(data) {
+    this.on('receive',function(data) {
         var streams = qtcp.network.client.viewer;
         
         var s = streams.find("#"+data[0]);
@@ -31,13 +31,13 @@ qtcp.network.protocol.register = function() {
                 'labels': chartHeader
             });
         }
-    };
+    });
 };
 
 qtcp.network.protocol.tell = function() {
     qtcp.network.packet.call(this,'tell');
     
-    this.receive = function(data) {
+    this.on('receive',function(data) {
         var streams = qtcp.network.client.viewer;
         
         var s = streams.find("#"+data[0]).find(".stream-value");
@@ -45,7 +45,7 @@ qtcp.network.protocol.tell = function() {
         s.html(data[2]);
         
         qtcp.network.client.log[data[1]] = data[2];
-    };
+    });
 };
 
 qtcp.network.protocol.translate = function() {
@@ -54,7 +54,7 @@ qtcp.network.protocol.translate = function() {
 
 qtcp.network.protocol.unregister = function() {
     qtcp.network.packet.call(this,'unregister');
-    this.receive = function(data) {
+    this.on('receive',function(data) {
         var streams = qtcp.network.client.viewer;
         var name = data[1];
         
@@ -94,12 +94,13 @@ qtcp.network.protocol.unregister = function() {
             'labels': chartHeader,
             'file': window.prices
         });
-    };
+    });
 };
 
 qtcp.network.protocol.liststreams = function() {
     qtcp.network.packet.call(this,'liststreams');
-    this.receive = function(data) {
+    
+    this.on('receive',function(data) {
         var list = qtcp.network.client.viewer.find(".list");
         list.html("");
         
@@ -134,7 +135,7 @@ qtcp.network.protocol.liststreams = function() {
             });
             list.append(li);
         }
-    };
+    });
 };
 
 qtcp.network.initialize();

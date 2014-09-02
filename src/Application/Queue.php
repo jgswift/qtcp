@@ -30,9 +30,9 @@ namespace qtcp\Application {
             }
         }
         
-        abstract protected function save();
+        abstract function save();
         
-        abstract protected function load();
+        abstract function load();
         
         function push($value) {
             parent::push($value);

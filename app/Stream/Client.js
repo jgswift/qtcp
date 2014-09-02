@@ -1,3 +1,55 @@
+function Subject(){
+  this.observerList = [];
+}
+ 
+Subject.prototype.add = function( obj ){
+  return this.observerList.push( obj );
+};
+ 
+Subject.prototype.count = function(){
+  return this.observerList.length;
+};
+ 
+Subject.prototype.get = function( index ){
+  if( index > -1 && index < this.observerList.length ){
+    return this.observerList[ index ];
+  }
+};
+ 
+Subject.prototype.indexOf = function( obj, startIndex ){
+  var i = startIndex;
+ 
+  while( i < this.observerList.length ){
+    if( this.observerList[i] === obj ){
+      return i;
+    }
+    i++;
+  }
+ 
+  return -1;
+};
+ 
+Subject.prototype.removeAt = function( index ){
+  this.observerList.splice( index, 1 );
+};
+
+Subject.prototype.notify = function( context ){
+  var observerCount = this.observerList.length;
+  for(var i=0; i < observerCount; i++){
+    this.get(i).call(context.sender,context.data);
+  }
+};
+
+function Event(sender,data) {
+    this.sender = sender;
+    this.canceled = false;
+    this.data = data;
+}
+
+Event.prototype.cancel = function() {
+    this.canceled = true;
+};
+
 Function.prototype.inheritsFrom = function(parentClassOrObject){ 
     if(parentClassOrObject.constructor instanceof Function) { 
         //Normal Inheritance 
@@ -23,20 +75,7 @@ Function.prototype.spawn = function(functionName /*, args */) {
       ns = this[namespaces[i]];
     }
     return new ns[func];
-}
-
-//var conn = new WebSocket('ws://localhost:8080');
-//conn.onopen = function(e) {
-//    console.log("Connection established!");
-//};
-//
-//conn.onmessage = function(e) {
-//    console.log(e.data);
-//};
-//
-//conn.send('Hello World!');
-
-
+};
 
 var qtcp = {
     resource: function(ip,port) {
@@ -127,8 +166,35 @@ qtcp.client.prototype.send = function(packet,data) {
 
 qtcp.network.packet = function(id) {
     this.id = id;
-    this.receive = function(data) { };
+    this.receiveObservers = new Subject;
+    this.sendObservers = new Subject;
+    this.receive = function(data) { 
+        var e = new Event(this,data);
+        this.receiveObservers.notify(e);
+    };
+    
     this.send = function(data) { 
-        qtcp.network.client.stream.socket.send(JSON.stringify({id:this.id,data:data}));
+        var e = new Event(this,data);
+        this.sendObservers.notify(e);
+        
+        if(!e.canceled) {
+            qtcp.network.client.stream.socket.send(JSON.stringify({id:this.id,data:data}));
+        }
+    };
+    
+    this.on = function(evt,fn) {
+        if(evt === 'receive') {
+            this.receiveObservers.add(fn);
+        } else if(evt === 'send') {
+            this.sendObservers.add(fn);
+        }
+    };
+    
+    this.unbind = function(evt) {
+        if(evt === 'receive') {
+            this.receiveObservers = new Subject;
+        } else if(evt === 'send') {
+            this.sendObservers = new Subject;
+        }
     };
 };
