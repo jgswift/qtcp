@@ -48,4 +48,4 @@ Open a web browser and navigate to ```localhost/qtcp/tests/Examples/CurrencyStre
 
 A sample application will appear, check any boxes on the left to initiate streaming.
 
-The code for the example server/client application is found in [tests/Examples/CurrencyStream](http://github.com/jgswift/qinq/tree/master/tests/Examples/CurrencyStream).
+The code for the example server/client application is found in [tests/Examples/CurrencyStream](http://github.com/jgswift/qtcp/tree/master/tests/Examples/CurrencyStream).
