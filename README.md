@@ -20,6 +20,20 @@ A simple test application is provided to demonstrate.
 
 **Server**
 
+*Configure*
+
+First, configure the host and port by editing the CurrencyStream [config.js](http://github.com/jgswift/qtcp/tree/master/tests/Examples/CurrencyStream/config.js)
+
+If you intend to run the client and server together on the same box, a likely configuration may be the following
+```js
+var CurrencyStream = {
+    host: 'localhost',
+    port: 8081
+};
+```
+
+*Start*
+
 In terminal or via SSH, navigate to the directory qtcp is located in and run the following command
 
 ```sh

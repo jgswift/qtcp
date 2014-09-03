@@ -1,9 +1,12 @@
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" type="text/javascript"></script>
-<script src="dygraphs.js" type="text/javascript"></script>
-<script src="Client.js" type="text/javascript"></script>
-<script src="Protocol.js" type="text/javascript"></script>
-
-<link rel="stylesheet" href="master.css"/>
+<html>
+    <head>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" type="text/javascript"></script>
+        <script src="dygraphs.js" type="text/javascript"></script>
+        <script src="Client.js" type="text/javascript"></script>
+        <script src="Protocol.js" type="text/javascript"></script>
+        <script src="config.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="master.css"/>
+        
 <script type="text/javascript">
 $(document).ready(function() {
     
@@ -21,7 +24,7 @@ $(document).ready(function() {
     qtcp.network.client = new qtcp.client(
         '#qtcp-container',
         new qtcp.stream(
-            new qtcp.resource('192.168.1.100',8081)
+            new qtcp.resource(CurrencyStream.host,CurrencyStream.port)
         )
     );
     
@@ -64,8 +67,8 @@ $(document).ready(function() {
 
 </script>
 
-
-
+    </head>
+    <body>
 <div id="qtcp-container">
     <ul class="list">
         
