@@ -19,6 +19,7 @@ qtcp is an experimental OOP abstraction for client/server applications using web
 A simple test application is provided to demonstrate.
 
 **Server**
+
 In terminal or via SSH, navigate to the directory qtcp is located in and run the following command
 
 ```sh
@@ -42,6 +43,7 @@ Server started.
 ```
 
 **Client**
+
 Open a web browser and navigate to ```localhost/qtcp/tests/Examples/CurrencyStream```.  Modify path if qtcp is in a different directory.
 
 A sample application will appear, check any boxes on the left to initiate streaming.
