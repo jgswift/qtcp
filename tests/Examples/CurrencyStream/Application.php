@@ -1,5 +1,5 @@
 <?php
-namespace qtcp\Tests\Examples\Stream {
+namespace qtcp\Tests\Examples\CurrencyStream {
     use qtcp;
     use qio;
     
@@ -40,7 +40,7 @@ namespace qtcp\Tests\Examples\Stream {
              * This timer will open up every source file
              * and randomly increase/decrease value plus or minus 20
              */
-            $this->addTimer(new qtcp\Application\Timer(0.1, function()use($file) {
+            $this->addTimer(new qtcp\Application\Timer(0.01, function()use($file) {
                 foreach($this->wrappers as $wrapper) {
                     $stream = $wrapper->createStream(\qio\Stream\Mode::ReadWrite);
 

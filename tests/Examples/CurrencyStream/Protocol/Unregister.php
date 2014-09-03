@@ -1,5 +1,5 @@
 <?php
-namespace qtcp\Tests\Examples\Stream\Protocol {
+namespace qtcp\Tests\Examples\CurrencyStream\Protocol {
     class Unregister extends \qtcp\Network\Packet {
         function __construct($data = null) {
             parent::__construct($data);

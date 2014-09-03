@@ -1,5 +1,5 @@
 <?php
-namespace qtcp\Tests\Examples\Stream {
+namespace qtcp\Tests\Examples\CurrencyStream {
     class Protocol extends \qtcp\Network\Packet\Builder {
         
     }

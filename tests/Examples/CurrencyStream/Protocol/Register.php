@@ -1,5 +1,5 @@
 <?php
-namespace qtcp\Tests\Examples\Stream\Protocol {
+namespace qtcp\Tests\Examples\CurrencyStream\Protocol {
     use qtcp;
     use qio;
     
