@@ -2,12 +2,9 @@
 namespace qtcp {
     use observr;
     use qtil;
-    use qio;
-    use Ratchet\ConnectionInterface;
+    use \Ratchet\ConnectionInterface;
     
-    class Client implements qio\Stream, \ArrayAccess {
-        use qtil\ArrayAccess;
-        
+    class Client implements \qio\Stream {
         protected $socket;
         protected $character;
         protected $id;
@@ -16,6 +13,7 @@ namespace qtcp {
         protected $pointer;
         protected $application;
         protected $timers;
+        protected $open = false;
         
         function __construct(Application $app, ConnectionInterface $socket) {
             $this->application = $app;
@@ -71,18 +69,23 @@ namespace qtcp {
             return ($this->idle > 900) ? true : false;
         }
         
-        function open() { }
+        function open() { 
+            $this->open = true;
+        }
         
         function close() {
-            $this->socket->close();
+            if($this->open) {
+                $this->open = false;
+                $this->socket->close();
+            }
         }
         
         function isOpen() {
-            return true;
+            return $this->open;
         }
         
         function idle() {
-            $this->idle+=0.01;
+            $this->idle+=$this->application->clock->getSpeed();
         }
         
         function refresh() {
@@ -90,19 +93,21 @@ namespace qtcp {
         }
         
         function send($packet,$data=null) {
-            if($packet instanceof Network\Packet) {
-                if(is_array($data)) {
-                    $packet->setData($data);
-                }
+            if($this->isOpen()) {
+                if($packet instanceof Network\Packet) {
+                    if(is_array($data)) {
+                        $packet->setData($data);
+                    }
 
-                $e = new observr\Event($this);
-                $packet->setState('send', $e);
+                    $e = new observr\Event($this);
+                    $packet->setState('send', $e);
 
-                if(!$e->canceled) {
-                    $this->socket->send((string)$packet);
+                    if(!$e->canceled) {
+                        $this->socket->send((string)$packet);
+                    }
+                } elseif(is_string($packet)) {
+                    $this->socket->send($packet);
                 }
-            } elseif(is_string($packet)) {
-                $this->socket->send($packet);
             }
         }
     }

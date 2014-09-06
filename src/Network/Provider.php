@@ -13,8 +13,8 @@ namespace qtcp\Network {
         function __construct(qtcp\Application $application) {
             $this->application = $application;
             $loop = \React\EventLoop\Factory::create();
-            $loop->addPeriodicTimer(0.1,function() {
-                $this->application->tick();
+            $loop->addPeriodicTimer($application->clock->getSpeed(),function() {
+                $this->application->clock->tick();
             });
 
             $component = new HttpServer(

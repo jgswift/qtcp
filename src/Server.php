@@ -32,6 +32,8 @@ namespace qtcp {
         public function onOpen(ConnectionInterface $conn) {
             // Store the new connection to send messages to later
             $this->clients[$conn->resourceId] = $client = new Client($this->application, $conn);
+            
+            $client->open();
 
             $this->console->writeLn("Connection + ({$conn->resourceId}):(".$conn->remoteAddress.") connected");
             
@@ -58,6 +60,8 @@ namespace qtcp {
         public function onClose(ConnectionInterface $conn) {
             // The connection is closed, remove it, as we can no longer send it messages
             $this->application->setState('disconnect', new observr\Event($this->clients[$conn->resourceId]));
+            
+            $this->clients[$conn->resourceId]->close();
             
             unset($this->clients[$conn->resourceId]);
 
