@@ -15,15 +15,20 @@ namespace qtcp\Stream {
 
         public function readPacket($json) {
             $json_data = \qtil\JSONUtil::decode($json);
-            $packet = $this->builder->link($json_data->id,[]);
-            
-            $data = [];
-            if(is_object($json_data) && isset($json_data->data)) {
-                $data = $json_data->data;
+            if(is_object($json_data) && isset($json_data->id)) {
+                $packet = $this->builder->link($json_data->id,[]);
+
+                $data = [];
+                if(is_object($json_data) && isset($json_data->data)) {
+                    $data = $json_data->data;
+                }
+
+                $packet->setData($data);
+                
+                return $packet;
             }
             
-            $packet->setData($data);
-            return $packet;
+            return false;
         }
         
         public function getBuilder() {

@@ -2,9 +2,12 @@
 namespace qtcp {
     use observr;
     use qtil;
+    use qio;
     use \Ratchet\ConnectionInterface;
     
-    class Client implements \qio\Stream {
+    class Client implements qio\Stream {
+        use observr\Subject;
+        
         protected $socket;
         protected $character;
         protected $id;
@@ -13,6 +16,7 @@ namespace qtcp {
         protected $pointer;
         protected $application;
         protected $timers;
+        protected $writer;
         protected $open = false;
         
         function __construct(Application $app, ConnectionInterface $socket) {
@@ -21,6 +25,7 @@ namespace qtcp {
             $this->id = $socket->resourceId;
             
             $this->timers = new qtil\Collection;
+            $this->writer = new Stream\Writer($app->getProtocol());
         }
         
         function getID() {
@@ -95,18 +100,9 @@ namespace qtcp {
         function send($packet,$data=null) {
             if($this->isOpen()) {
                 if($packet instanceof Network\Packet) {
-                    if(is_array($data)) {
-                        $packet->setData($data);
-                    }
-
-                    $e = new observr\Event($this);
-                    $packet->setState('send', $e);
-
-                    if(!$e->canceled) {
-                        $this->socket->send((string)$packet);
-                    }
+                    $this->writer->writePacket($packet, $data);
                 } elseif(is_string($packet)) {
-                    $this->socket->send($packet);
+                    $this->writer->write($packet);
                 }
             }
         }

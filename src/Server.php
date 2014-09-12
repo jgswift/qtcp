@@ -6,6 +6,8 @@ namespace qtcp {
     use qtil;
 
     class Server implements MessageComponentInterface {
+        use observr\Subject;
+        
         protected $clients;
         
         private $reader;
@@ -47,10 +49,10 @@ namespace qtcp {
             
             $packet = $this->reader->readPacket($msg);
             
-            
             if($packet) {
                 $client->refresh();
                 $packet->setState('receive', new Network\Packet\Event($client,$packet));
+                $this->setState($packet->getID(), new Network\Packet\Event($client,$packet));
             }
 
             $this->console->writeLn(sprintf('Connection | %d:(%s) sent "%s"'
