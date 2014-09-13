@@ -11,7 +11,7 @@ $(document).ready(function() {
     qtcp.network.client = new qtcp.client(
         "body",
         new qtcp.stream(
-            new qtcp.resource(LightStream.host,LightStream.port)
+            new qtcp.resource(SampleStream.host,SampleStream.port)
         )
     );
     
