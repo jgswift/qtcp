@@ -70,8 +70,8 @@ var SampleStream = {
 
 In terminal or via SSH, navigate to the directory qtcp is located in and start the server
 ```sh
-cd vendor/jgswift/qtcp/
-php tests/Examples/SampleStream/Server.php localhost:8081
+$ cd vendor/jgswift/qtcp/
+$ php tests/Examples/SampleStream/Server.php localhost:8081
 ```
 
 The server will start and you will see
@@ -154,14 +154,14 @@ var CurrencyStream = {
 
 In terminal or via SSH, navigate to the directory qtcp is located in and start the server
 ```sh
-cd vendor/jgswift/qtcp/
-php tests/Examples/CurrencyStream/Server.php
+$ cd vendor/jgswift/qtcp/
+$ php tests/Examples/CurrencyStream/Server.php
 ```
 
 Alternatively, you may specify the host/port
 
 ```sh
-php tests/Examples/CurrencyStream/Server.php 0.0.0.0:8081
+$ php tests/Examples/CurrencyStream/Server.php 0.0.0.0:8081
 ```
 
 The user initiating the server will need write privileges to the ```tests/Examples/CurrencyStream``` folder for this test
