@@ -1,7 +1,9 @@
 qtcp
 ==== 
 
-Web socket server/client using php and javascript
+Web socket client/server using php and javascript
+
+[![Build Status](https://travis-ci.org/jgswift/qtcp.png?branch=master)](https://travis-ci.org/jgswift/qtcp)
 
 ## Installation
 
@@ -69,7 +71,7 @@ var SampleStream = {
 In terminal or via SSH, navigate to the directory qtcp is located in and start the server
 ```sh
 cd vendor/jgswift/qtcp/
-php tests/Examples/CurrencyStream/Server.php localhost:8081
+php tests/Examples/SampleStream/Server.php localhost:8081
 ```
 
 The server will start and you will see
