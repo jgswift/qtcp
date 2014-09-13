@@ -1,7 +1,7 @@
 qtcp
 ==== 
 
-An experimental object-oriented ratchet wrapper
+Web socket server/client using php and javascript
 
 ## Installation
 
@@ -13,6 +13,7 @@ php composer.phar require jgswift/qtcp:dev-master
 ## Dependency
 
 * php 5.5+
+* [html5 web sockets](http://caniuse.com/#feat=websockets)
 * [cboden/ratchet](http://github.com/cboden/ratchet)
 * [symfony/console](http://github.com/symfony/console)
 * [jgswift/qtil](http://github.com/jgswift/qtil)

@@ -1,10 +1,9 @@
 {
     "name": "jgswift/qtcp",
-    "description": "UI reactive stream engine using Ratchet",
-    "keywords": ["php", "react", "ui"],
+    "description": "Web socket server/client using php and javascript",
+    "keywords": ["php", "websockets", "server", "tcp"],
     "license": "MIT",
     "type": "library",
-    "minimum-stability": "dev",
     "authors": [
         {
             "name": "Josh Swift",
@@ -16,7 +15,7 @@
     "require": {
         "php": ">=5.5",
         "cboden/ratchet": "0.3.*",
-        "symfony/console": "2.5.*@dev",
+        "symfony/console": "2.5.*",
         "jgswift/qtil": "0.1.*",
         "jgswift/qio": "0.1.*",
         "jgswift/observr": "0.1.*",
