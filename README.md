@@ -14,14 +14,13 @@ php composer.phar require jgswift/qtcp:dev-master
 
 ## Dependency
 
-* php 5.5+
+* [php](http://php.net) 5.5+
 * [html5 web sockets](http://caniuse.com/#feat=websockets)
 * [cboden/ratchet](http://github.com/cboden/ratchet)
 * [symfony/console](http://github.com/symfony/console)
 * [jgswift/qtil](http://github.com/jgswift/qtil)
 * [jgswift/qio](http://github.com/jgswift/qio)
 * [jgswift/observr](http://github.com/jgswift/observr)
-* [jgswift/delegatr](http://github.com/jgswift/delegatr)
 
 ## Description
 
