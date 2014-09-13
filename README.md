@@ -44,7 +44,8 @@ $app->run();
 
 ## Examples
 
-### [Sample Stream](http://github.com/jgswift/qtcp/tree/master/tests/Examples/SampleStream)
+### Sample Stream
+*[tests/Examples/SampleStream](http://github.com/jgswift/qtcp/tree/master/tests/Examples/SampleStream)*
 
 The sample stream serves as a conceptual prototype to demonstrate the most basic functionality
 
@@ -127,7 +128,8 @@ $('input').on('click',function() {
 });
 ```
 
-### Currency Stream
+### Currency Stream 
+*[tests/Examples/CurrencyStream](http://github.com/jgswift/qtcp/tree/master/tests/Examples/CurrencyStream)*
 
 The currency stream example simulates a currency index which concurrently updates all clients with price changes.
 
@@ -174,5 +176,3 @@ Open a web browser and navigate to ```http://localhost/your_project_directory/ve
 *Note: Modify path if qtcp is in a different directory.*
 
 The price streaming application will list a currency index.  Check any boxes on the left to initiate streaming.
-
-**[tests/Examples/CurrencyStream](http://github.com/jgswift/qtcp/tree/master/tests/Examples/CurrencyStream)**
