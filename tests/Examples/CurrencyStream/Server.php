@@ -3,11 +3,11 @@ $loader = require __DIR__ . '/../../../tests/bootstrap.php';
 
 $host = '0.0.0.0';
 $port = 8081;
-if(isset($argv[0])) {
-    if(strpos($argv[0],':') !== false) {
-        list($host, $port) = explode(':',$argv[0]);
+if(isset($argv[1])) {
+    if(strpos($argv[1],':') !== false) {
+        list($host, $port) = explode(':',$argv[1]);
     } else {
-        $host = $argv[0];
+        $host = $argv[1];
     }
 }
 

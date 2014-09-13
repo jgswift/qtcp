@@ -16,7 +16,6 @@ namespace qtcp\Tests\Examples\CurrencyStream\Protocol {
                 foreach($wrappers as $w) {
                     $id = $w->getID();
                     $name = $w->getName();
-                    
                     if($id == $e['data'][0]) {
                         $stream = $w->createStream(qio\Stream\Mode::Read);
                         $reader = $w->createReader($stream);
@@ -40,7 +39,7 @@ namespace qtcp\Tests\Examples\CurrencyStream\Protocol {
                         });
                         
                         $timers->insert($id,$timer);
-                        $app->addTimer($timer);
+                        $app->clock->addTimer($timer);
                         
                         $timer->start();
                         

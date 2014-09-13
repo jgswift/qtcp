@@ -2,7 +2,7 @@
     <head>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" type="text/javascript"></script>
         <script src="dygraphs.js" type="text/javascript"></script>
-        <script src="Client.js" type="text/javascript"></script>
+        <script src="../Client.js" type="text/javascript"></script>
         <script src="Protocol.js" type="text/javascript"></script>
         <script src="config.js" type="text/javascript"></script>
         <link rel="stylesheet" href="master.css"/>
@@ -22,11 +22,13 @@ $(document).ready(function() {
     window.prices = "";
     
     qtcp.network.client = new qtcp.client(
-        '#qtcp-container',
+        "#qtcp-container",
         new qtcp.stream(
             new qtcp.resource(CurrencyStream.host,CurrencyStream.port)
         )
     );
+    
+    qtcp.network.client.connect();
     
     window.tick = 1;
     
@@ -54,6 +56,8 @@ $(document).ready(function() {
                 }
 
                 window.prices = window.prices + "\n";
+                
+                console.log(window.prices);
 
                 window.graph.updateOptions({
                     'file': window.prices

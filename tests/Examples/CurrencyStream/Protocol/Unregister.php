@@ -20,7 +20,7 @@ namespace qtcp\Tests\Examples\CurrencyStream\Protocol {
                         $name = $wrappers[$id]->getName();
                     }
                     
-                    $app->removeTimer($timer);
+                    $app->clock->removeTimer($timer);
                     $client->getTimers()->remove($id);
                     $client->send(new self,[$id,$name]);
                 }

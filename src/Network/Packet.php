@@ -3,18 +3,28 @@ namespace qtcp\Network {
     use observr;
     use qtil;
     
-    abstract class Packet implements \ArrayAccess {
+    class Packet implements \ArrayAccess {
         use observr\Subject, qtil\Reflector;
         
         public $id;
         public $data = [];
         
-        public function __construct($data=null) {
+        /**
+         * 
+         * @param string $id
+         * @param array $data
+         */
+        public function __construct($id = null, $data=null) {
+            if(is_array($id)) {
+                $this->data = $id;
+                $this->id = $this->getID();
+            } elseif(is_string($id)) {
+                $this->id = $id;
+            }
+            
             if(is_array($data)) {
                 $this->data = $data;
             }
-            
-            $this->id = $this->getID();
         }
         
         public function getData() {
@@ -26,11 +36,15 @@ namespace qtcp\Network {
         }
         
         public function getID() {
-            return strtolower(qtil\ReflectorUtil::getClassName(get_called_class()));
+            if(!isset($this->id)) {
+                $this->id = strtolower(qtil\ReflectorUtil::getClassName(get_called_class()));
+            }
+            
+            return $this->id;
         }
         
         public function __toString() {
-            return \qtil\JSONUtil::encode(['id'=>$this->id,'data'=>$this->data]);
+            return \qtil\JSONUtil::encode(['id'=>$this->getID(),'data'=>$this->data]);
         }
 
         public function offsetExists($offset) {

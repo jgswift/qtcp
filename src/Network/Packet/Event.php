@@ -4,16 +4,16 @@ namespace qtcp\Network\Packet {
     use qtcp;
     
     class Event extends observr\Event {
-        function __construct(qtcp\Client $client, qtcp\Network\Packet $packet) {
-            parent::__construct($client, ['packet'=>$packet,'data'=>$packet->data]);
+        public function __construct($sender, qtcp\Network\Packet $packet) {
+            parent::__construct($sender, ['packet'=>$packet,'data'=>$packet->getData(),'id'=>$packet->getID()]);
         }
         
-        function getClient() {
-            return $this->sender;
+        public function getID() {
+            return $this['id'];
         }
         
-        function getPacket() {
-            return $this->packet;
+        public function getPacket() {
+            return $this['packet'];
         }
     }
 }

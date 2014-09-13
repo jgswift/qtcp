@@ -10,13 +10,43 @@ Install via [composer](https://getcomposer.org/):
 php composer.phar require jgswift/qtcp:dev-master
 ```
 
+## Dependency
+
+* php 5.5+
+* [cboden/ratchet](http://github.com/cboden/ratchet)
+* [symfony/console](http://github.com/symfony/console)
+* [jgswift/qtil](http://github.com/jgswift/qtil)
+* [jgswift/qio](http://github.com/jgswift/qio)
+* [jgswift/observr](http://github.com/jgswift/observr)
+* [jgswift/delegatr](http://github.com/jgswift/delegatr)
+
 ## Description
 
-qtcp is an experimental OOP abstraction for client/server applications using websockets (cboden/ratchet)
+qtcp is an experimental abstraction layer for client/server applications using websockets
 
 ## Usage
 
-A simple test application is provided to demonstrate.
+### General
+
+```php
+$app = new qtcp\Network\Application(['0.0.0.0',8081]);
+
+$app->attach('connect',function($client) {
+    $client->attach('event', function($client, $e) {
+        /* do something with event */
+    });
+    
+    $client->attach('disconnect', function() {
+        /* teardown client here */
+    });
+});
+
+$app->run();
+```
+
+## Examples
+
+### Currency Stream
 
 **Server**
 
@@ -34,10 +64,9 @@ var CurrencyStream = {
 
 *Start*
 
-In terminal or via SSH, navigate to the directory qtcp is located in and run the following command
-
+In terminal or via SSH, navigate to the directory qtcp is located in and start the server
 ```sh
-cd /var/www/qtcp
+cd vendor/jgswift/qtcp/
 php tests/Examples/CurrencyStream/Server.php
 ```
 

@@ -25,7 +25,7 @@ namespace qtcp {
             $this->id = $socket->resourceId;
             
             $this->timers = new qtil\Collection;
-            $this->writer = new Stream\Writer($app->getProtocol());
+            $this->writer = new Stream\Writer($this);
         }
         
         function getID() {
@@ -100,7 +100,11 @@ namespace qtcp {
         function send($packet,$data=null) {
             if($this->isOpen()) {
                 if($packet instanceof Network\Packet) {
-                    $this->writer->writePacket($packet, $data);
+                    $e = new Network\Packet\Event($this, $packet);
+                    $packet->setState('send', $e);
+                    if(!$e->canceled) {
+                        $this->writer->writePacket($packet, $data);
+                    }
                 } elseif(is_string($packet)) {
                     $this->writer->write($packet);
                 }

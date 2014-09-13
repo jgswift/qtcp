@@ -3,7 +3,6 @@ namespace qtcp {
     use \Ratchet\MessageComponentInterface;
     use \Ratchet\ConnectionInterface;
     use observr;
-    use qtil;
 
     class Server implements MessageComponentInterface {
         use observr\Subject;
@@ -52,16 +51,20 @@ namespace qtcp {
             if($packet) {
                 $client->refresh();
                 $packet->setState('receive', new Network\Packet\Event($client,$packet));
-                $this->setState($packet->getID(), new Network\Packet\Event($client,$packet));
-            }
+                $client->setState($packet->getID(), new Network\Packet\Event($client,$packet));
 
-            $this->console->writeLn(sprintf('Connection | %d:(%s) sent "%s"'
-                , $from->resourceId, $from->remoteAddress, qtil\ReflectorUtil::getClassName(get_class($packet))));
+                $this->console->writeLn(sprintf('Connection | %d:(%s) sent "%s"'
+                    , $from->resourceId, $from->remoteAddress, $packet->getID()));
+            }
         }
 
         public function onClose(ConnectionInterface $conn) {
             // The connection is closed, remove it, as we can no longer send it messages
-            $this->application->setState('disconnect', new observr\Event($this->clients[$conn->resourceId]));
+            $client = $this->clients[$conn->resourceId];
+            
+            $event = new observr\Event($client);
+            $client->setState('disconnect',$event);
+            $this->application->setState('disconnect', $event);
             
             $this->clients[$conn->resourceId]->close();
             

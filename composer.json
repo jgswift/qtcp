@@ -22,6 +22,12 @@
         "jgswift/observr": "0.1.*",
         "jgswift/delegatr": "0.1.*"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/jgswift/FunctionParser"
+        }
+    ],
     "require-dev": {
         "phpunit/phpunit": "3.7.*"
     },

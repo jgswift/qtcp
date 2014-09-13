@@ -4,7 +4,7 @@ qtcp.network.protocol.ask = function() {
 
 qtcp.network.protocol.register = function() {
     qtcp.network.packet.call(this,'register');
-    this.on('receive',function(data) {
+    this.attach('receive',function(data) {
         var streams = qtcp.network.client.viewer;
         
         var s = streams.find("#"+data[0]);
@@ -37,7 +37,7 @@ qtcp.network.protocol.register = function() {
 qtcp.network.protocol.tell = function() {
     qtcp.network.packet.call(this,'tell');
     
-    this.on('receive',function(data) {
+    this.attach('receive',function(data) {
         var streams = qtcp.network.client.viewer;
         
         var s = streams.find("#"+data[0]).find(".stream-value");
@@ -54,7 +54,7 @@ qtcp.network.protocol.translate = function() {
 
 qtcp.network.protocol.unregister = function() {
     qtcp.network.packet.call(this,'unregister');
-    this.on('receive',function(data) {
+    this.attach('receive',function(data) {
         var streams = qtcp.network.client.viewer;
         var name = data[1];
         
@@ -100,7 +100,7 @@ qtcp.network.protocol.unregister = function() {
 qtcp.network.protocol.liststreams = function() {
     qtcp.network.packet.call(this,'liststreams');
     
-    this.on('receive',function(data) {
+    this.attach('receive',function(data) {
         var list = qtcp.network.client.viewer.find(".list");
         list.html("");
         

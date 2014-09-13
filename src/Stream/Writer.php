@@ -5,11 +5,7 @@ namespace qtcp\Stream {
     
     class Writer extends qio\Stream\Writer {
         public function write($data) {
-            if($data instanceof qtcp\Network\Packet) {
-                $this->writePacket($data);
-            } else {
-                $this->getSocket()->send((string)$data);
-            }
+            $this->getSocket()->send((string)$data);
         }
         
         public function writePacket(qtcp\Network\Packet $packet, $data = null) {
@@ -17,13 +13,7 @@ namespace qtcp\Stream {
                 $packet->setData($data);
             }
 
-            $e = new qtcp\Network\Packet\Event($this, $packet);
-            $packet->setState('send', $e);
-            $this->setState($packet->getID(), $e);
-
-            if(!$e->canceled) {
-                $this->write($packet);
-            }
+            $this->write($packet);
         }
         
         public function getSocket() {

@@ -1,16 +1,19 @@
 <?php
 namespace qtcp\Stream {
+    use qtcp;
     use observr;
     
-    abstract class Application extends \qtcp\Application\Base {
+    class Application extends qtcp\Network\Application {
         
         protected $wrappers;
         
-        function __construct(\qtcp\Network\Resource $resource) {
+        function __construct($resource) {
             $this->wrappers = new observr\Collection();
             
             parent::__construct($resource);
         }
+        
+        public function initialize() { }
         
         function getWrappers() {
             return $this->wrappers;

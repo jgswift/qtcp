@@ -1,6 +1,7 @@
 <?php
 namespace qtcp\Stream {
     use qtcp;
+    use qtil;
     
     class Reader extends \qio\Stream\Reader {
         
@@ -15,15 +16,19 @@ namespace qtcp\Stream {
 
         public function readPacket($json) {
             $json_data = \qtil\JSONUtil::decode($json);
+            //TODO: VALIDATE JSON SCHEMA
             if(is_object($json_data) && isset($json_data->id)) {
-                $packet = $this->builder->link($json_data->id,[]);
-
                 $data = [];
-                if(is_object($json_data) && isset($json_data->data)) {
+                if(isset($json_data->data)) {
                     $data = $json_data->data;
                 }
-
-                $packet->setData($data);
+                
+                $packet = false;
+                try {
+                    $packet = $this->builder->link($json_data->id,[$data]);
+                } catch(\BadMethodCallException $e) {
+                    $packet = new qtcp\Network\Packet($json_data->id,(array)$data);
+                }
                 
                 return $packet;
             }

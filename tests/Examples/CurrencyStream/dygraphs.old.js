@@ -1,4 +1,3 @@
-/*! @license Copyright 2011 Dan Vanderkam (danvdk@gmail.com) MIT-licensed (http://opensource.org/licenses/MIT) */
 Date.ext = {};
 Date.ext.util = {};
 Date.ext.util.xPad = function(a, c, b) {

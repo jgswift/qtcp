@@ -1,0 +1,9 @@
+body {
+    font-family: Arial;
+    background:black;
+    color:white;
+}
+
+input[type="button"] {
+    color:black;
+}

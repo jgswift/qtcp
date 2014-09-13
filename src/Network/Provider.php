@@ -18,10 +18,10 @@ namespace qtcp\Network {
             });
 
             $component = new HttpServer(
-                    new WsServer(
-                        $this->server = new \qtcp\Server($application)
-                    )
-                );
+                new WsServer(
+                    $this->server = new \qtcp\Server($application)
+                )
+            );
 
             $socket = new \React\Socket\Server($loop);
             
