@@ -26,8 +26,6 @@ qtcp is an experimental abstraction layer for client/server applications using w
 
 ## Usage
 
-### General
-
 ```php
 $app = new qtcp\Network\Application(['0.0.0.0',8081]);
 
@@ -87,7 +85,7 @@ Server started.
 
 **Client**
 
-Open a web browser and navigate to ```localhost/qtcp/tests/Examples/CurrencyStream```.  Modify path if qtcp is in a different directory.
+Open a web browser and navigate to ```..vendor/jgswift/qtcp/tests/Examples/CurrencyStream```.  Modify path if qtcp is in a different directory.
 
 A sample application will appear, check any boxes on the left to initiate streaming.
 
