@@ -85,7 +85,7 @@ Server started.
 
 **Client**
 
-Open a web browser and navigate to ```..vendor/jgswift/qtcp/tests/Examples/CurrencyStream```.  Modify path if qtcp is in a different directory.
+Open a web browser and navigate to ```http://localhost/your_project_directory/vendor/jgswift/qtcp/tests/Examples/CurrencyStream```.  Modify path if qtcp is in a different directory.
 
 A sample application will appear, check any boxes on the left to initiate streaming.
 
