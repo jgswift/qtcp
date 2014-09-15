@@ -25,7 +25,9 @@ namespace qtcp\Stream {
                 
                 $packet = false;
                 try {
-                    $packet = $this->builder->link($json_data->id,[$data]);
+                    $packet = $this->builder->link($json_data->id,[$json_data->id,$data]);
+                    $packet->id = $json_data->id;
+                    $packet->data = $data;
                 } catch(\BadMethodCallException $e) {
                     $packet = new qtcp\Network\Packet($json_data->id,(array)$data);
                 }

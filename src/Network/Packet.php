@@ -16,15 +16,17 @@ namespace qtcp\Network {
          */
         public function __construct($id = null, $data=null) {
             if(is_array($id)) {
-                $this->data = $id;
-                $this->id = $this->getID();
-            } elseif(is_string($id)) {
+                $data = $id;
+                $id = null;
+            }
+            
+            if(is_null($id)) {
+                $this->getID();
+            } else {
                 $this->id = $id;
             }
             
-            if(is_array($data)) {
-                $this->data = $data;
-            }
+            $this->data = $data;
         }
         
         public function getData() {

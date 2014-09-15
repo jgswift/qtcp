@@ -30,11 +30,11 @@ namespace qtcp\Tests\Examples\CurrencyStream\Protocol {
                             $stream->seek(0);
                             $value = $reader->readAll();
                             $stream->unlock();
-                            $client->send(new Tell([
+                            $client->send(new Tell(), [
                                 $id,
                                 $name,
                                 $value
-                            ]));
+                            ]);
                             $stream->close();
                         });
                         

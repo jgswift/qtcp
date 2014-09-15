@@ -17,7 +17,7 @@ namespace qtcp\Tests\Examples\CurrencyStream {
                 }
                 
                 // informs client of available streams
-                $client->send(new Protocol\ListStreams(['streams'=>$wrappers]));
+                $client->send(new Protocol\ListStreams(),['streams'=>$wrappers]);
             });
             
             $streams = [
