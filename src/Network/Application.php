@@ -92,7 +92,7 @@ namespace qtcp\Network {
         }
         
         function __destruct() {
-            $clients = $this->application->getServer()->getClients();
+            $clients = $this->getServer()->getClients();
 
             if(!empty($clients)) {
                 foreach($clients as $client) {
