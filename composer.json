@@ -19,7 +19,7 @@
         "jgswift/qtil": "0.1.*",
         "jgswift/qio": "0.1.*",
         "jgswift/observr": "0.2.*",
-        "jgswift/bubblr": "0.1.2"
+        "jgswift/bubblr": "0.1.*"
     },
     "repositories": [
         {

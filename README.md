@@ -21,6 +21,7 @@ php composer.phar require jgswift/qtcp:dev-master
 * [jgswift/qtil](http://github.com/jgswift/qtil)
 * [jgswift/qio](http://github.com/jgswift/qio)
 * [jgswift/observr](http://github.com/jgswift/observr)
+* [jgswift/bubblr](http://github.com/jgswift/bubblr)
 
 ## Description
 
