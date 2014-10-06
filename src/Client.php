@@ -3,9 +3,10 @@ namespace qtcp {
     use observr;
     use qtil;
     use qio;
-    use \Ratchet\ConnectionInterface;
+    use Ratchet\ConnectionInterface;
+    use observr\Subject\SubjectInterface;
     
-    class Client implements qio\Stream, \ArrayAccess {
+    class Client implements qio\Stream, \ArrayAccess, SubjectInterface {
         use observr\Subject, qtil\ArrayAccess;
         
         protected $socket;
@@ -102,7 +103,7 @@ namespace qtcp {
                 if($packet instanceof Network\Packet) {
                     $e = new Network\Packet\Event($this, $packet);
                     $packet->setState('send', $e);
-                    if(!$e->canceled) {
+                    if(!$e->isCanceled()) {
                         $this->writer->writePacket($packet, $data);
                     }
                 } elseif(is_string($packet)) {

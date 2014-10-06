@@ -163,8 +163,6 @@ Alternatively, you may specify the host/port
 $ php tests/Examples/CurrencyStream/Server.php 0.0.0.0:8081
 ```
 
-The user initiating the server will need write privileges to the ```tests/Examples/CurrencyStream``` folder for this test
-
 The server will start and you will see
 
 ```

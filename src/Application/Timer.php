@@ -8,10 +8,19 @@ namespace qtcp\Application {
         protected $interval;
         protected $callback;
         protected $enabled;
+        protected $clock;
         
         function __construct($interval, callable $callback) {
             $this->setInterval($interval);            
             $this->callback = $callback;
+        }
+        
+        public function getClock() {
+            return $this->clock;
+        }
+        
+        public function setClock(BubblerClock $clock) {
+            return $this->clock = $clock;
         }
         
         function getInterval() {

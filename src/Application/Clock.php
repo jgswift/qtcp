@@ -4,9 +4,9 @@ namespace qtcp\Application {
     
     class Clock {
         protected $timers = [];
-        private $tick = 1;
-        private $application;
-        private $speed = 0.001;
+        protected $tick = 1;
+        protected $application;
+        protected $speed = 0.001;
         
         /**
          * Creates an empty clock
@@ -115,20 +115,6 @@ namespace qtcp\Application {
             foreach($this->timers as $interval => $timers) {
                 if($this->dmod($this->tick,(float)$interval)) {
                     $this->executeTimers($timers);
-                }
-            }
-
-            $clients = $this->application->getServer()->getClients();
-
-            // INCREASE IDLE TIME ON ALL CLIENTS
-            if(!empty($clients)) {
-                foreach($clients as $client) {
-                    $client->idle();
-
-                    //KICK CLIENTS IDLING OVER 15 MINUTES
-                    if($client->isIdle()) {
-                        $client->close();
-                    }
                 }
             }
             

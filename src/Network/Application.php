@@ -3,8 +3,9 @@ namespace qtcp\Network {
     use qtcp;
     use observr;
     use Symfony\Component\Console\Output;
+    use observr\Subject\SubjectInterface;
     
-    class Application implements qtcp\Application {
+    class Application implements qtcp\Application, SubjectInterface {
         use observr\Subject;
 
         protected $provider;
@@ -18,7 +19,7 @@ namespace qtcp\Network {
         function __construct($resource) {
             $this->resource = $this->parseResource($resource);
             $this->console = new Output\ConsoleOutput();
-            $this->clock = new qtcp\Application\Clock($this);
+            $this->clock = new qtcp\Application\BubblerClock($this);
             $this->provider = new qtcp\Network\Provider($this);
 
             if(method_exists($this,'initialize')) {
@@ -47,7 +48,7 @@ namespace qtcp\Network {
             }
             
             if(!($resource instanceof qtcp\Network\Resource)) {
-                throw new \InvalidArgumentException;
+                throw new \InvalidArgumentException('Invalid resource supplied');
             }
             
             return $resource;
@@ -81,23 +82,13 @@ namespace qtcp\Network {
             $this->console->writeLn("Starting server..");
             $this->setState('start', $e = new observr\Event($this));
 
-            if($e->canceled) {
+            if($e->isCanceled()) {
                 $message = (isset($e->message)) ? $e->message : 'Unknown reason';
                 $this->console->writeLn('Server start failed.. "'.$message.'"');
             } else {
                 $this->console->writeLn('Server started.');
                 $this->provider->getIO()->run();
                 $this->console->writeLn('Shutting down..');
-            }
-        }
-        
-        function __destruct() {
-            $clients = $this->getServer()->getClients();
-
-            if(!empty($clients)) {
-                foreach($clients as $client) {
-                    $client->close();
-                }
             }
         }
     }

@@ -1,14 +1,14 @@
 <?php
 namespace qtcp\Stream {
     use qtcp;
-    use observr;
+    use qtil;
     
     class Application extends qtcp\Network\Application {
         
         protected $wrappers;
         
         function __construct($resource) {
-            $this->wrappers = new observr\Collection();
+            $this->wrappers = new qtil\Collection();
             
             parent::__construct($resource);
         }

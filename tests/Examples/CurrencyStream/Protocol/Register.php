@@ -20,16 +20,14 @@ namespace qtcp\Tests\Examples\CurrencyStream\Protocol {
                         $stream = $w->createStream(qio\Stream\Mode::Read);
                         $reader = $w->createReader($stream);
                         $stream->open();
-                        $stream->lock();
+                        //$stream->lock();
                         $value = $reader->readAll();
                         $stream->close();
                             
-                        $timer = new qtcp\Application\Timer(0.1,function()use($reader,$stream,$client,$id,$name) {
+                        $timer = new qtcp\Application\BubbleTimer(0.1,function()use($reader,$stream,$client,$id,$name) {
                             $stream->open();
-                            $stream->lock();
                             $stream->seek(0);
                             $value = $reader->readAll();
-                            $stream->unlock();
                             $client->send(new Tell(), [
                                 $id,
                                 $name,

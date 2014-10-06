@@ -2,11 +2,13 @@
 namespace qtcp\Tests\Examples\CurrencyStream {
     use qtcp;
     use qio;
+    use Vfs\FileSystem;
+    use Vfs\Node\Directory;
+    use Vfs\Node\File;
     
     class Application extends qtcp\Stream\Application {
         function initialize() {
             $this->attach('connect',function($client) {
-                
                 $wrappers = [];
                 
                 foreach($this->wrappers as $w) {
@@ -30,8 +32,11 @@ namespace qtcp\Tests\Examples\CurrencyStream {
                 'usd'
             ];
             
+            $fs = FileSystem::factory('qtcp://');
+                
             foreach($streams as $name) {
-                $file = new qio\File(__DIR__.'/stream_'.$name);
+                file_put_contents('qtcp:///stream_'.$name.'.dat',rand(0,1000));
+                $file = new qio\File('qtcp:///stream_'.$name.'.dat');
                 $w = new qtcp\Stream\Wrapper($name, $file);
                 $this->wrappers->insert($w->getID(), $w);
             }
@@ -40,17 +45,15 @@ namespace qtcp\Tests\Examples\CurrencyStream {
              * This timer will open up every source file
              * and randomly increase/decrease value plus or minus 20
              */
-            $this->clock->addTimer(new qtcp\Application\Timer(0.01, function()use($file) {
+            $this->clock->addTimer(new qtcp\Application\BubbleTimer(0.01, function()use($file) {
                 foreach($this->wrappers as $wrapper) {
                     $stream = $wrapper->createStream(\qio\Stream\Mode::ReadWrite);
 
-                    
                     $reader = $wrapper->createReader($stream);
 
                     if(!$stream->isOpen()) {
                         $stream->open();
                     }
-                    $stream->lock();
                     $oldValue = (int)$reader->readAll();
                     
                     $writer = $wrapper->createWriter($stream);
@@ -63,10 +66,8 @@ namespace qtcp\Tests\Examples\CurrencyStream {
                     if($newValue > 1000) {
                         $newValue = 1000;
                     }
-                    ftruncate ( $stream->getPointer() , 0 );
                     $stream->rewind();
                     $writer->write($newValue);
-                    $stream->unlock();
                     $stream->close();
                 }
             }));

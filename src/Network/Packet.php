@@ -2,8 +2,9 @@
 namespace qtcp\Network {
     use observr;
     use qtil;
+    use observr\Subject\SubjectInterface;
     
-    class Packet implements \ArrayAccess {
+    class Packet implements \ArrayAccess, SubjectInterface {
         use observr\Subject, qtil\Reflector;
         
         public $id;

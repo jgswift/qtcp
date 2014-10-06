@@ -15,6 +15,20 @@ namespace qtcp\Network {
             $loop = \React\EventLoop\Factory::create();
             $loop->addPeriodicTimer($application->clock->getSpeed(),function() {
                 $this->application->clock->tick();
+                
+                $clients = $this->application->getServer()->getClients();
+
+                // INCREASE IDLE TIME ON ALL CLIENTS
+                if(!empty($clients)) {
+                    foreach($clients as $client) {
+                        $client->idle();
+
+                        //KICK CLIENTS IDLING OVER 15 MINUTES
+                        if($client->isIdle()) {
+                            $client->close();
+                        }
+                    }
+                }
             });
 
             $component = new HttpServer(

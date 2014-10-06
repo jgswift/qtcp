@@ -1,10 +1,11 @@
 <?php
 namespace qtcp {
-    use \Ratchet\MessageComponentInterface;
-    use \Ratchet\ConnectionInterface;
+    use Ratchet\MessageComponentInterface;
+    use Ratchet\ConnectionInterface;
     use observr;
+    use observr\Subject\SubjectInterface;
 
-    class Server implements MessageComponentInterface {
+    class Server implements MessageComponentInterface, SubjectInterface {
         use observr\Subject;
         
         protected $clients;
