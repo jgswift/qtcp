@@ -27,7 +27,6 @@ namespace qtcp\Application {
                 foreach($timers as $timer) {
                     $timer->setClock($this);
                     $bubble = $timer();
-                    $this->bubbler->getSpout()->push($bubble);
                 }
             }
         }
@@ -35,7 +34,7 @@ namespace qtcp\Application {
         /**
          * Ticks all timers in clock
          */
-        public function tick() {
+        function tick() {
             foreach($this->timers as $interval => $timers) {
                 if($this->dmod($this->tick,(float)$interval)) {
                     $this->executeTimers($timers);

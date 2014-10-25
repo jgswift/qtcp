@@ -1,20 +1,18 @@
 <?php
 namespace qtcp\Application {
-
-    use bubblr\Bubble\CallableBubble;
+    use bubblr;
     
     class BubbleTimer extends Timer {
-        protected $bubble;
-
-        public function setCallback(callable $callback) {
-            parent::setCallback($callback);
-            $this->bubble = new CallableBubble($this->callback);
-        }
-
-        public function execute() {
+        
+        
+        function execute() {
             if(!$this->enabled) { return; }
-
-            return $this->bubble;
+            
+            //return new bubblr\Bubble\CallableBubble($this->callback);
+            
+            $this->getClock()->getBubbler()->getSpout()->push(
+                new bubblr\Bubble\CallableBubble($this->callback)
+            );
         }
     }
 }
