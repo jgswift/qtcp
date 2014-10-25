@@ -9,10 +9,10 @@ namespace qtcp\Application {
         protected $callback;
         protected $enabled;
         protected $clock;
-        
-        function __construct($interval, callable $callback) {
-            $this->setInterval($interval);            
-            $this->callback = $callback;
+
+        public function __construct($interval, callable $callback) {
+            $this->setInterval($interval);
+            $this->setCallback($callback);
         }
         
         public function getClock() {
@@ -22,36 +22,36 @@ namespace qtcp\Application {
         public function setClock(BubblerClock $clock) {
             return $this->clock = $clock;
         }
-        
-        function getInterval() {
+
+        public function getInterval() {
             return $this->interval;
         }
 
-        function setInterval($interval) {
+        public function setInterval($interval) {
             if(is_numeric($interval)) {
                 $this->interval = $interval;
             } else {
                 throw new \InvalidArgumentException;
             }
         }
-        
-        function getCallback() {
+
+        public function getCallback() {
             return $this->callback;
         }
-        
-        function setCallback(callable $callback) {
+
+        public function setCallback(callable $callback) {
             return $this->callback = $callback;
         }
-        
-        function stop() {
+
+        public function stop() {
             $this->enabled = false;
         }
-        
-        function start() {
+
+        public function start() {
             $this->enabled = true;
         }
-        
-        function execute() {
+
+        public function execute() {
             if(!$this->enabled) { return; }
             if($this->callback instanceof \Closure) {
                 @$this->callback->bindTo($this,$this);
