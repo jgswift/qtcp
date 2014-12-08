@@ -79,8 +79,6 @@ namespace qtcp\Application {
                     $timer->stop();
                     unset($this->timers[$i][$k]);
                 }
-            } else {
-                var_dump($i);
             }
         }
         

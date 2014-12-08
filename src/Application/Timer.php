@@ -31,7 +31,7 @@ namespace qtcp\Application {
             if(is_numeric($interval)) {
                 $this->interval = $interval;
             } else {
-                throw new \InvalidArgumentException;
+                throw new \InvalidArgumentException("Interval must be a numeric integer or float - (".gettype($interval).")");
             }
         }
 
